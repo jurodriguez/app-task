@@ -1,0 +1,65 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Categorías
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToTasks()" (keydown.enter)="goToTasks()" color="primary">
+        <ion-icon name="list" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Categorías</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Nombre: </ion-label>
+      <ion-input [(ngModel)]="newCategory.name" name="categoryName"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <div style="margin: 20px;">
+    <ion-buttons slot="end">
+      <ion-button (click)="initCategory()" onkeypress="initCategory()" expand="block" shape="round" color="primary">
+        Limpiar
+      </ion-button>
+      <ion-button (click)="save()" onkeypress="save()" expand="block" shape="round" color="success">
+        Guardar
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  @if (cargando) {
+  <div style="text-align: center;">
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  }
+
+  <ion-list>
+    @for (cat of categories; track $index) {
+    <ion-item>
+      <ion-label>
+        Nombre: {{cat.name}}
+      </ion-label>
+      <ion-buttons slot="end">
+
+        <ion-button (click)="edit(cat)" onkeypress="edit(cat)">
+          <ion-icon slot="icon-only" name="create" color="primary"></ion-icon>
+        </ion-button>
+
+        <ion-button (click)="delete(cat)" onkeypress="delete(cat)">
+          <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    }
+  </ion-list>
+
+</ion-content>

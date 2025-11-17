@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">AppTask</string>
+    <string name="title_activity_main">AppTask</string>
+    <string name="package_name">com.apptask.app</string>
+    <string name="custom_url_scheme">com.apptask.app</string>
+</resources>
