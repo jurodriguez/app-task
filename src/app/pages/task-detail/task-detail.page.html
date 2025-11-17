@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isNew ? 'Nueva Tarea' : 'Editar Tarea' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  @if (task) {
+
+  <ion-list>
+    <!-- TÍTULO -->
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input [(ngModel)]="task.title" placeholder="Título de la tarea"></ion-input>
+    </ion-item>
+
+    <!-- ESTADO -->
+    @if (!isNew) {
+    <ion-item>
+      <ion-label>Completada</ion-label>
+      <ion-toggle [(ngModel)]="task.done"></ion-toggle>
+    </ion-item>
+    }
+
+    <!-- CATEGORÍA -->
+    <ion-item>
+      <ion-label position="stacked">Categoría</ion-label>
+
+      <ion-select [(ngModel)]="task.categoryId" interface="popover" placeholder="Seleccione una categoría">
+        <ion-select-option *ngFor="let cat of categories" [value]="cat.id">
+          {{ cat.name }}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-list>
+  }
+
+  <div style="padding: 16px;">
+    <ion-button expand="block" color="success" (click)="save()" [disabled]="!task" onkeypress="save()">
+      Guardar
+    </ion-button>
+
+    <ion-button expand="block" color="medium" (click)="cancelar()" onkeypress="cancelar()">
+      Cancelar
+    </ion-button>
+
+    @if (cargando) {
+    <div style="text-align:center; margin-top:12px;">
+      <ion-spinner></ion-spinner>
+    </div>
+    }
+  </div>
+
+</ion-content>
